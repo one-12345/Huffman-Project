@@ -4,9 +4,10 @@ import sys
 #Example:
 #python3 huffman_frequency_count.py [filepath]
 
-#Output is a text file with sorted character frequencies in the format 'character-space-frequency'
+#Output is a text file 'output.txt' with sorted character frequencies in the format 'character-space-frequency'
 #Example:
 #b 5
+#. 12
 
 text_file = sys.argv[1]
 frequency_dict = {}
@@ -19,7 +20,6 @@ with open(text_file) as f:
         else:
             frequency_dict[char] = 1
 sorted_frequency_dict = dict(sorted(frequency_dict.items(), key=lambda item: item[1]))
-print(sorted_frequency_dict)
 
 with open('output.txt', 'w') as f:
     for entry in sorted_frequency_dict:
