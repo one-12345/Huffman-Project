@@ -16,7 +16,7 @@ class Node {
 		this.binary = binary;
 	}
 }
-public class BuildTreAndLookupTable {
+public class BuildTreeAndLookupTable {
 	public static void main (String[] args) throws FileNotFoundException {
         String filename = args[0];
         Scanner scan = new Scanner(new FileReader(filename));
