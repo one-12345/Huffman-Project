@@ -7,8 +7,15 @@ public class Decompressor {
         Scanner sc1 = new Scanner(lookupFilePath);
         Map<String,String> lookupTable = new HashMap<>();
         while (sc1.hasNext()) {
-            String[] line = sc1.nextLine().split(",");
-            lookupTable.put(line[0],line[1]);
+            // String[] line = sc1.nextLine().split(",");
+            // lookupTable.put(line[0],line[1]);
+            char[] line = sc1.nextLine().toCharArray();
+            String key = String.valueOf(line[0]);
+            String value = "";
+            for (int i = 2; i < line.length; i++) {
+                value+=line[i];
+            }
+            lookupTable.put(key,value);
         }
         sc1.close();
 
