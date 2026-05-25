@@ -27,9 +27,7 @@ public class huffmanLookup {
         String out = "";
         for(int i = 0; i< s.length(); i++) {
             int c = s.charAt(i);
-            if(!table.containsKey((char)c)){
-                out += 11100;
-            }else{
+            if(table.containsKey((char)c)){
                 System.out.println(c);
                 String plus = table.get((char)c);
                 out += plus;
