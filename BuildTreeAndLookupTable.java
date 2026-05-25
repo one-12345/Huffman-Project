@@ -70,7 +70,6 @@ public class BuildTreeAndLookupTable {
 				bfs.add(current.right);
 			}
 			else {
-				System.out.println(current.symbol);
                 lookupTableSymbols.add(current.symbol);
                 lookupTableBinaryStrings.add(current.binary);
 			}
