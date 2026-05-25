@@ -76,7 +76,8 @@ public class BuildTreeAndLookupTable {
 			}
 		}
 		for (int i = 0; i < lookupTableSymbols.size(); i++) {
-			System.out.println(lookupTableSymbols.get(i) + ": " + lookupTableBinaryStrings.get(i));
+			System.out.println(lookupTableSymbols.get(i) + " " + lookupTableBinaryStrings.get(i));
 		}
+		scan.close();
 	}
 }
