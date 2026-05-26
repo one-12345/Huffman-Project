@@ -1,5 +1,11 @@
 import java.util.*;
+import java.io.*;
+import java.nio.file.*;
 public class Decompressor {
+
+    public static void main(String[] Args) {
+        System.out.println(decompress("messageToBits.txt","encode_input.txt"));
+    }
     
     public static String decompress(String bytesFilePath, String lookupFilePath) {
 
@@ -17,7 +23,7 @@ public class Decompressor {
                 ind = 1;
             }
             else {
-                while (line[ind] != ' ') {
+                while (line[ind] != ' ' && ind < line.length - 1) {
                     key+=line[ind];
                     ind++;
                 }
@@ -30,26 +36,27 @@ public class Decompressor {
         }
         sc1.close();
 
-        //Creates bitString out of the binary file
-        Scanner sc2 = new Scanner(bytesFilePath);
-        StringBuilder bitString = new StringBuilder();
-        while (sc2.hasNext()) {
-            bitString.append(sc2.nextInt());
-            break;
-        }
-        sc2.close(); 
+        //Creates bitString out of the binary
+        byte[] bytes = new byte[0];
+        try {
+            bytes = Files.readAllBytes(Paths.get(lookupFilePath));
+        } catch (IOException e) { e.printStackTrace(); }
 
         //Decodes bitString
         StringBuilder decoded = new StringBuilder(); 
-        String currentBits = ""; 
-        for (int i = 0; i < bitString.length(); i++) {
-            currentBits += bitString.charAt(i);  
-            if (lookupTable.containsKey(currentBits)) {
-                decoded.append(lookupTable.get(currentBits));
-                currentBits = "";
+        byte current = 0;
+        for (int i = 0; i < bytes.length; i++) {
+            for (int j = 0; j < 8; j++) {
+                current = (byte) (current << 1);
+                if ((bytes[i] << j) == 1) {
+                    current = (byte) (current | 1);
+                }
+            }
+            if (lookupTable.containsKey(current)) {
+                decoded.append(lookupTable.get(current));
+                current = 0;
             }
         }
-        
         return decoded.toString();
     }
 }
