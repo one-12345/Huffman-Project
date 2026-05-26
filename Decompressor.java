@@ -10,9 +10,19 @@ public class Decompressor {
             // String[] line = sc1.nextLine().split(",");
             // lookupTable.put(line[0],line[1]);
             char[] line = sc1.nextLine().toCharArray();
-            String key = String.valueOf(line[0]);
+            String key = " ";
+            int ind = 0;
+            if (line[0] == ' ') {
+                key = " ";
+            }
+            else {
+                while (line[ind] != ' ') {
+                    key+=line[ind];
+                    ind++;
+                }
+            }
             String value = "";
-            for (int i = 2; i < line.length; i++) {
+            for (int i = ind+1; i < line.length; i++) {
                 value+=line[i];
             }
             lookupTable.put(key,value);
