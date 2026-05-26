@@ -1,13 +1,15 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.*;
 public class huffmanLookup {
 
     public static void main(String[] args) throws FileNotFoundException{
         File file = new File(args[0]);
-        messageToBits("Beyond syntax, efficiency is key. Standard dictionary lookups run in O(1) average time complexity because Python utilizes a highly optimized hash table under the hood. This makes dictionary operations incredibly fast, even when scaling to millions of entries. By mastering these built-in tools and understanding their performance benefits, you can write Pythonic code that is both highly efficient and exceptionally easy for other developers to read, maintain, and debug over time.", buildTable(file));
+        stringToBytes(messageToBits("Beyond syntax, efficiency is key. Standard dictionary lookups run in O(1) average time complexity because Python utilizes a highly optimized hash table under the hood. This makes dictionary operations incredibly fast, even when scaling to millions of entries. By mastering these built-in tools and understanding their performance benefits, you can write Pythonic code that is both highly efficient and exceptionally easy for other developers to read, maintain, and debug over time.", buildTable(file)));
     }
 
     public static HashMap<String, String> buildTable(File tableFile) throws FileNotFoundException{
@@ -18,10 +20,8 @@ public class huffmanLookup {
             String[] nextLine = scanner.nextLine().split(" ");
             if(nextLine.length == 3){
                 table.put(" ", nextLine[2]);
-                System.out.println(" , " + nextLine[2]);
             }else{
                 table.put(nextLine[0], nextLine[1]);
-                System.out.println(nextLine[0] + ", " + nextLine[1]);
             }
             
         }
@@ -38,17 +38,15 @@ public class huffmanLookup {
                     return out;
                 }
             }
-            System.out.println(c);
             if(table.containsKey(c)){
                 String plus = table.get(c);
                 out += plus;
-                System.out.println(plus);
-                System.out.println(out);
             }
         }
 
         try(FileWriter fw = new FileWriter("messageToBits.txt")){
             fw.write(out);
+            System.out.println("Compression complete.");
         }
 
         catch (IOException e) {
@@ -57,5 +55,27 @@ public class huffmanLookup {
         }
         return out;
 
+    }
+
+
+    public static void stringToBytes(String input) throws FileNotFoundException{
+        OutputStream outputStream = new FileOutputStream("messageToBits.bin");
+
+        char[] array = input.toCharArray();
+        BitSet bits = new BitSet(array.length);
+        for(int i = 0; i < array.length; i++){  
+            if(array[i] == '1'){
+                bits.set(i);
+            }else{
+                bits.clear(i);
+            }
+        }
+
+        try {
+            outputStream.write(bits.toByteArray());
+            System.out.println("Binary file created.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
