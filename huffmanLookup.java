@@ -7,7 +7,7 @@ public class huffmanLookup {
 
     public static void main(String[] args) throws FileNotFoundException{
         File file = new File(args[0]);
-        messageToBits("hello csc590", buildTable(file));
+        messageToBits("Beyond syntax, efficiency is key. Standard dictionary lookups run in O(1) average time complexity because Python utilizes a highly optimized hash table under the hood. This makes dictionary operations incredibly fast, even when scaling to millions of entries. By mastering these built-in tools and understanding their performance benefits, you can write Pythonic code that is both highly efficient and exceptionally easy for other developers to read, maintain, and debug over time.", buildTable(file));
     }
 
     public static HashMap<String, String> buildTable(File tableFile) throws FileNotFoundException{
