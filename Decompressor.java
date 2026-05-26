@@ -10,7 +10,7 @@ public class Decompressor {
             // String[] line = sc1.nextLine().split(",");
             // lookupTable.put(line[0],line[1]);
             char[] line = sc1.nextLine().toCharArray();
-            String key = " ";
+            String key = "";
             int ind = 0;
             if (line[0] == ' ') {
                 key = " ";
@@ -35,7 +35,6 @@ public class Decompressor {
         StringBuilder bitString = new StringBuilder();
         while (sc2.hasNext()) {
             bitString.append(sc2.nextInt());
-            break;
         }
         sc2.close(); 
 
