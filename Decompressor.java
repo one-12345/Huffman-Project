@@ -14,6 +14,7 @@ public class Decompressor {
             int ind = 0;
             if (line[0] == ' ') {
                 key = " ";
+                ind = 1;
             }
             else {
                 while (line[ind] != ' ') {
