@@ -7,29 +7,40 @@ public class huffmanLookup {
 
     public static void main(String[] args) throws FileNotFoundException{
         File file = new File(args[0]);
-        messageToBits("a b c d e f g h i j k l m n o", buildTable(file));
+        messageToBits("hello csc590", buildTable(file));
     }
 
-    public static HashMap<Character, String> buildTable(File tableFile) throws FileNotFoundException{
-        HashMap<Character, String> table = new HashMap<Character, String>();
+    public static HashMap<String, String> buildTable(File tableFile) throws FileNotFoundException{
+        HashMap<String, String> table = new HashMap<String, String>();
         Scanner scanner = new Scanner(tableFile);
 
         while(scanner.hasNextLine()){
-           char nextChar = scanner.next().toCharArray()[0];
-           String byteString = scanner.next();
-           table.put(nextChar, byteString);
-           System.out.println(nextChar + ", " + byteString);
+            String[] nextLine = scanner.nextLine().split(" ");
+            if(nextLine.length == 3){
+                table.put(" ", nextLine[2]);
+                System.out.println(" , " + nextLine[2]);
+            }else{
+                table.put(nextLine[0], nextLine[1]);
+                System.out.println(nextLine[0] + ", " + nextLine[1]);
+            }
+            
         }
         scanner.close();
         return table;
     }
- public static String messageToBits(String s, HashMap<Character, String> table) {
+ public static String messageToBits(String s, HashMap<String, String> table) {
         String out = "";
         for(int i = 0; i< s.length(); i++) {
-            int c = s.charAt(i);
-            if(table.containsKey((char)c)){
-                System.out.println(c);
-                String plus = table.get((char)c);
+            String c = "";
+            c += s.charAt(i);
+            if(c == "E"){
+                if(s.charAt(i+1) == 'O' && s.charAt(i) == 'F'){
+                    return out;
+                }
+            }
+            System.out.println(c);
+            if(table.containsKey(c)){
+                String plus = table.get(c);
                 out += plus;
                 System.out.println(plus);
                 System.out.println(out);
