@@ -35,7 +35,6 @@ public class Decompressor {
         StringBuilder bitString = new StringBuilder();
         while (sc2.hasNext()) {
             bitString.append(sc2.nextInt());
-            break;
         }
         sc2.close(); 
 
